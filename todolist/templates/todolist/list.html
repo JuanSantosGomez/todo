@@ -1,11 +1,33 @@
-<h3>To Do</h3>
 
-{% for task in tasks %}
+{% include 'todolist/headers.html' %}
 
-    <div>
 
-        <p>{{task}}</p>
 
-    </div>
 
-{% endfor %}
+<div class="center-column">
+
+<form method="POST" action="/">
+    {%csrf_token%}
+    {{form.title}}
+    <input class="btn btn-info" type = "submit" name="Create Task" value="Create Task">
+</form>
+
+<div>
+    {% for task in tasks %}
+        {% if task.complete == True %}
+        <div class="item-row-complete">
+        {% else %}
+        <div class="item-row">
+        {% endif %}
+            <a class="btn btn-sm btn-info" href="{% url 'update_task' task.id%}">Update</a>
+            <a class="btn btn-sm btn-danger" href="{% url 'delete_task' task.id%}">Delete</a>
+            {% if task.complete == True %}
+            <strike>{{task}}</strike>
+            {% else %}
+            <span>{{task}}</span>
+            {% endif %}
+        </div>
+
+    {% endfor %}
+</div>
+</div>

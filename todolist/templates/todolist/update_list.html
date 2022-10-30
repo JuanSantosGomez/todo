@@ -1,0 +1,12 @@
+
+{% include 'todolist/headers.html' %}
+<div class="center-column">
+
+
+<form method="POST" action="">
+    {%csrf_token%}
+    {{form}}
+    <input class="btn btn-info" value="Update Task" type="submit" name="Update Task">
+</form>
+</div>
+</div>
